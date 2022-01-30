@@ -20,18 +20,26 @@ namespace Brandon_Cassidy_CS559_Assignment_1
         private void Form1_Load(object sender, EventArgs e)
         {
             Decimal squareArea, triangleArea, x, y;
-
+            long factorialResult = 0;
+            int factorial;
+           
             // Length or base
-            x = 0m;
+            x = 10m;
 
             // Width or Height
             y = 10m;
-            
-            squareArea = CalculateArea(Shape.Square,x,y);
-            MessageBox.Show($"The area of a square with a length of {x} and a width of {y} is: {squareArea}ft\u00B2"); // u00B2 is a superscript 2.
 
-            triangleArea = CalculateArea(Shape.Triangle, x, y);
-            MessageBox.Show($"The area of a triangle with a base of {x} and a height of {y} is: {triangleArea}ft\u00B2");
+            // Factorial to evaluate.
+            factorial = 200;
+
+            //squareArea = CalculateArea(Shape.Square, x, y);
+            //MessageBox.Show($"The area of a square with a length of {x} and a width of {y} is: {squareArea}ft\u00B2"); // u00B2 is a superscript 2.
+
+            //triangleArea = CalculateArea(Shape.Triangle, x, y);
+            //MessageBox.Show($"The area of a triangle with a base of {x} and a height of {y} is: {triangleArea}ft\u00B2");
+
+            factorialResult = CalculateFactorial(factorial);
+            MessageBox.Show($"The result of {factorial}! is: {factorialResult.ToString("N0")}");
 
         }
 
@@ -40,7 +48,7 @@ namespace Brandon_Cassidy_CS559_Assignment_1
             Square = 1,
             Triangle = 2
         }
-
+        #region CalculateArea
         /*********************************************
          * Method Name: CalculateArea
          * Parameters:
@@ -92,7 +100,9 @@ namespace Brandon_Cassidy_CS559_Assignment_1
 
             return area;
         }
+        #endregion
 
+        #region CalculateFactorial
         /*********************************************
         * Method Name: CalculateFactorial
         * Parameters:
@@ -101,20 +111,46 @@ namespace Brandon_Cassidy_CS559_Assignment_1
         * Purpose: Take the an int, and calculate the factorial.
         * Notes: A factorial is the selected number multiplied by all whole numbers down until 1, e.g., 5! would be 5x4x3x2x1 = 120.
        *********************************************/
-        private Int64 CalculateFactorial(Int32 num)
+        private long CalculateFactorial(int num)
         {
-            Int64 answer = 0;
+            long answer = 0;
             
-            // initialize the counter for the loop.
-            byte i = 0;
+            // initialize the counter for the loop to the max value of num.
+            int i = num;
 
-            //
-            while (i < num)
+            try
             {
-                answer *= i;
+                // Check if num is between 1 and 100. If it isn't, throw an error.
+                if (num < 1 || num > 100)
+                {
+                    throw new Exception("The integer value must be between 1 and 100.");
+                }
+
+                // Muliply's answer times the next value in the line and re-stores the new value in answer. Decrements i until it reaches 0
+                while (i > 0)
+                {
+                    // Anything multiplied by 0 is 0. If the value of i equals num, which it does on the first iteration, then set the value of answer to the value of i.
+                    if(i == num)
+                    {
+                        answer = i;
+                    }
+                    else
+                    {
+                       answer *= i;     
+                    }
+
+                    i--;
+                }
             }
+            catch (Exception Ex)
+            {
+
+                MessageBox.Show(String.Format("StackTrace = {0}", Ex.StackTrace), this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
 
             return answer;
         }
+        #endregion
     }
 }
