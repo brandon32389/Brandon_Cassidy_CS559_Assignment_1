@@ -30,7 +30,7 @@ namespace Brandon_Cassidy_CS559_Assignment_1
             y = 10m;
 
             // Factorial to evaluate.
-            factorial = 200;
+            factorial = 5;
 
             //squareArea = CalculateArea(Shape.Square, x, y);
             //MessageBox.Show($"The area of a square with a length of {x} and a width of {y} is: {squareArea}ft\u00B2"); // u00B2 is a superscript 2.
@@ -38,8 +38,11 @@ namespace Brandon_Cassidy_CS559_Assignment_1
             //triangleArea = CalculateArea(Shape.Triangle, x, y);
             //MessageBox.Show($"The area of a triangle with a base of {x} and a height of {y} is: {triangleArea}ft\u00B2");
 
-            factorialResult = CalculateFactorial(factorial);
-            MessageBox.Show($"The result of {factorial}! is: {factorialResult.ToString("N0")}");
+            //factorialResult = CalculateFactorial(factorial);
+            //MessageBox.Show($"The result of {factorial}! is: {factorialResult.ToString("N0")}");
+
+            string test = CalculateMultiplicationTables(50, 12);
+            MessageBox.Show(test);
 
         }
 
@@ -150,6 +153,24 @@ namespace Brandon_Cassidy_CS559_Assignment_1
             
 
             return answer;
+        }
+        #endregion
+
+        #region CalculateMultiplicationTables
+        private String CalculateMultiplicationTables(Int32 XMax, Int32 YMax)
+        {
+            String result = string.Empty;
+
+            for (int i = 1; i <= YMax; i++)
+            {
+                for(int j = 1; j <= XMax; j++)
+                {
+
+                    result += $"{j} * {i} = {j * i} \n";
+                }
+            }
+
+            return result;
         }
         #endregion
     }
