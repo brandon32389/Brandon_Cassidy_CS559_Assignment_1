@@ -41,8 +41,9 @@ namespace Brandon_Cassidy_CS559_Assignment_1
             //factorialResult = CalculateFactorial(factorial);
             //MessageBox.Show($"The result of {factorial}! is: {factorialResult.ToString("N0")}");
 
-            string test = CalculateMultiplicationTables(50, 12);
-            MessageBox.Show(test);
+            textBox1.Text = CalculateMultiplicationTables(50, 12);
+            //string test = CalculateMultiplicationTables(50, 12);
+            //MessageBox.Show(test);
 
         }
 
@@ -157,17 +158,35 @@ namespace Brandon_Cassidy_CS559_Assignment_1
         #endregion
 
         #region CalculateMultiplicationTables
+        //private String CalculateMultiplicationTables(Int32 XMax, Int32 YMax)
+        //{
+        //    String result = string.Empty;
+
+        //    for (int i = 1; i <= YMax; i++)
+        //    {
+        //        for(int j = 1; j <= XMax; j++)
+        //        {
+
+        //            result += $"{j} * {i} = {j * i} {Environment.NewLine}";
+        //        }
+        //    }
+
+        //    return result;
+        //}
+
         private String CalculateMultiplicationTables(Int32 XMax, Int32 YMax)
         {
             String result = string.Empty;
 
-            for (int i = 1; i <= YMax; i++)
+            for (int i = 1; i <= XMax; i++)
             {
-                for(int j = 1; j <= XMax; j++)
+                for (int j = 1; j <= YMax; j++)
                 {
 
-                    result += $"{j} * {i} = {j * i} \n";
+                    result += $"{i} * {j} = {j * i}          ";
                 }
+
+                result += Environment.NewLine; // Add line break 
             }
 
             return result;
