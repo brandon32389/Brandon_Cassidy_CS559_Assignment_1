@@ -32,18 +32,16 @@ namespace Brandon_Cassidy_CS559_Assignment_1
             // Factorial to evaluate.
             factorial = 5;
 
-            //squareArea = CalculateArea(Shape.Square, x, y);
-            //MessageBox.Show($"The area of a square with a length of {x} and a width of {y} is: {squareArea}ft\u00B2"); // u00B2 is a superscript 2.
+            squareArea = CalculateArea(Shape.Square, x, y);
+            MessageBox.Show($"The area of a square with a length of {x} and a width of {y} is: {squareArea}ft\u00B2"); // u00B2 is a superscript 2.
 
-            //triangleArea = CalculateArea(Shape.Triangle, x, y);
-            //MessageBox.Show($"The area of a triangle with a base of {x} and a height of {y} is: {triangleArea}ft\u00B2");
+            triangleArea = CalculateArea(Shape.Triangle, x, y);
+            MessageBox.Show($"The area of a triangle with a base of {x} and a height of {y} is: {triangleArea}ft\u00B2");
 
-            //factorialResult = CalculateFactorial(factorial);
-            //MessageBox.Show($"The result of {factorial}! is: {factorialResult.ToString("N0")}");
+            factorialResult = CalculateFactorial(factorial);
+            MessageBox.Show($"The result of {factorial}! is: {factorialResult.ToString("N0")}");
 
             textBox1.Text = CalculateMultiplicationTables(50, 12);
-            //string test = CalculateMultiplicationTables(50, 12);
-            //MessageBox.Show(test);
 
         }
 
@@ -158,36 +156,71 @@ namespace Brandon_Cassidy_CS559_Assignment_1
         #endregion
 
         #region CalculateMultiplicationTables
-        //private String CalculateMultiplicationTables(Int32 XMax, Int32 YMax)
-        //{
-        //    String result = string.Empty;
-
-        //    for (int i = 1; i <= YMax; i++)
-        //    {
-        //        for(int j = 1; j <= XMax; j++)
-        //        {
-
-        //            result += $"{j} * {i} = {j * i} {Environment.NewLine}";
-        //        }
-        //    }
-
-        //    return result;
-        //}
-
-        private String CalculateMultiplicationTables(Int32 XMax, Int32 YMax)
+        /*********************************************
+        * Method Name: CalculateMultiplicationTables
+        * Parameters:
+        *      XMax - The 1 on the left hand of the multiplication sign. Defaulted to out of rang value of -1.
+        *      YMax - The 1 on the right hand of the multiplication sign. Defaulted to out of rang value of 13.
+        * Returns: Returns a formatted string to be written to a text box.
+        * Purpose: Display multiplication tables for the provided inputs.
+       *********************************************/
+        private String CalculateMultiplicationTables(Int32 XMax = -1, Int32 YMax = 13)
         {
-            String result = string.Empty;
+            String result = string.Empty, expression = string.Empty;
 
-            for (int i = 1; i <= XMax; i++)
+           
+            try
             {
-                for (int j = 1; j <= YMax; j++)
+                // Check if XMax is between 0 and 12 or  YMax is between 0 and 50. If either is not within that range, throw an error.
+                if (XMax < 0 || XMax > 12 || YMax < 0 || YMax > 50)
                 {
-
-                    result += $"{i} * {j} = {j * i}          ";
+                    throw new Exception("The value of x must not be greater than 12. The value of y must not be greater than 50.");
                 }
 
-                result += Environment.NewLine; // Add line break 
+                // Loops through and  writes out the x-axis in the inner loop, then the y-axis in the outer loop. i.e write left to right, top to bottom like a text editor.
+                for (int i = 1; i <= XMax; i++)
+                {
+                    for (int j = 1; j <= YMax; j++)
+                    {
+
+                        expression = $"{i}*{j}={j * i}";
+
+                        // This switch statement ensures the different values will always equal 15 characters.
+                        // Does not scale well and a better method would be needed to handle larger numbers.
+                        switch (expression.Length)
+                        {
+                            case 5:
+                                result += $"{expression}          ";
+                                break;
+
+                            case 6:
+                                result += $"{expression}         ";
+                                break;
+
+                            case 7:
+                                result += $"{expression}        ";
+                                break;
+
+                            case 8:
+                                result += $"{expression}       ";
+                                break;
+
+                            case 9:
+                                result += $"{expression}      ";
+                                break;
+                        }
+
+                    }
+
+                    result += Environment.NewLine; // Add line break 
+                }
             }
+            catch (Exception Ex)
+            {
+
+                MessageBox.Show(String.Format("StackTrace = {0}", Ex.StackTrace), this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
 
             return result;
         }
